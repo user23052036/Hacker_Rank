@@ -5,7 +5,7 @@
 ## Overview
 
 <p style="text-align:center;">
-    <img src="https://gifer.com/embed/3AyY" alt="Coding Animation" style="width:300px;">
+    <img src="\images\3AyY.gif" alt="Coding Animation" style="width:300px;">
 </p>
 
 Welcome to my Hacker Rank Solutions Repository! This repository contains my solutions to various challenges and problems on [HackerRank](https://www.hackerrank.com/). Here, you will find solutions categorized by domains such as C Language, Problem Solving, SQL, 30 Days of Code, C++, and Bash. Each solution is implemented in a different programming language to showcase versatility and depth in problem-solving skills.
