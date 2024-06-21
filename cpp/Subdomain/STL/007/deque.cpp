@@ -1,7 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int max(int,int);
+template <typename Iterator>
+Iterator max_it(Iterator a, Iterator b) 
+{
+    return (*a >= *b) ? a : b;
+}
+
 int main() 
 {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
@@ -13,7 +18,6 @@ int main()
         int n,k;
         cin>>n>>k;
         deque<int>dq;
-        vector<int>result;
 
         for(int i=0; i<n; i++)
         {
@@ -21,19 +25,18 @@ int main()
             cin>>x;
             dq.emplace_back(x);
         }
-        auto it =  max_element(dq.begin(),dq.begin()+k-1);
-        int MX = *it;
 
-        for(int i=k; i<dq.size(); i++)
+        auto ptr_max=dq.begin()-1;
+        for(auto it=dq.begin(); it<=dq.end()-k; it++)
         {
-            MX = max(MX,dq[i]);
+            if(ptr_max >= it)
+                ptr_max = max_it(ptr_max,it+k-1);
+            else
+                ptr_max = max_element(it,it+k);
+
+            cout<<*ptr_max<<" ";
         }
+        cout<<"\n";
     }  
     return 0;
-}
-
-int max(int a, int b)
-{
-    if(a>=b) return a;
-    else return b;
 }
