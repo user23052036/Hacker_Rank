@@ -4,13 +4,13 @@
 #include<stdbool.h>
 
 int permutation_number(char*);
-void permutation(char*,int,int,char**,int*,int);
+void permutation(char*,int,int,char**,int*);
 bool cheak(char**,char*,int);
 void swap(char*,char*);
 int factorial(int);
 int main()
 {
-    char s[] = "ABCD";
+    char s[] = "ABC";
     int length = strlen(s);
     int number = permutation_number(s);
     int count=0;
@@ -21,10 +21,11 @@ int main()
         result[i] = (char*)malloc((length+1)*sizeof(char));
 
 
-    permutation(s,0,length-1,result,&count,number);
+    permutation(s,0,length-1,result,&count);
 
     for(int i=0; i<number; i++)
         printf("%s\n",result[i]);
+    printf("\nTotal numner of permutations is:--->%d\n",number);
 
 
     for(int i=0; i<number; i++)
@@ -43,7 +44,7 @@ int permutation_number(char *s)
         ascii[(int)s[i]]++;
 
     int denominator=1;
-    for(int i=0; i<256; i++)
+    for(int i=0; i<255; i++)
     {
         if(ascii[i]>1)
             denominator *= factorial(ascii[i]);
@@ -53,11 +54,17 @@ int permutation_number(char *s)
     return(length_2d);
 }
 
-void permutation(char *s, int left, int right, char **result, int *count, int number)
+int factorial(int num)
+{
+    if(num<=1) return 1;
+    else return num*factorial(num-1);
+}
+
+void permutation(char *s, int left, int right, char **result, int *count)
 {
     if(left == right)
     {
-        if(cheak(result,s,number) == false)
+        if(cheak(result,s,*count) == false)
         {
             strcpy(result[*count],s);
             (*count)++;
@@ -68,25 +75,19 @@ void permutation(char *s, int left, int right, char **result, int *count, int nu
     for(int i=left; i<=right; i++)
     {
         swap(s+left,s+i);
-        permutation(s,left+1,right,result,count,number);
+        permutation(s,left+1,right,result,count);
         swap(s+left,s+i);
     }
 }
 
-bool cheak(char **result, char *s, int length_2d)
+bool cheak(char **result, char *s, int count)
 {
-    for(int i=0; i<length_2d; i++)
+    for(int i=0; i<count; i++)
     {
         if(strcmp(result[i],s) == 0)
             return true;
     }
     return false;
-}
-
-int factorial(int num)
-{
-    if(num==0 || num==1) return 1;
-    else return num*factorial(num-1);
 }
 
 void swap(char *ch1, char *ch2)
